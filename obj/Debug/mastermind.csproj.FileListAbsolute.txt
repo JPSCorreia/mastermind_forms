@@ -1,0 +1,10 @@
+C:\João Correia\ATEC\mastermind\bin\Debug\mastermind.exe.config
+C:\João Correia\ATEC\mastermind\bin\Debug\mastermind.exe
+C:\João Correia\ATEC\mastermind\bin\Debug\mastermind.pdb
+C:\João Correia\ATEC\mastermind\obj\Debug\mastermind.csproj.AssemblyReference.cache
+C:\João Correia\ATEC\mastermind\obj\Debug\mastermind.Mastermind.resources
+C:\João Correia\ATEC\mastermind\obj\Debug\mastermind.Properties.Resources.resources
+C:\João Correia\ATEC\mastermind\obj\Debug\mastermind.csproj.GenerateResource.cache
+C:\João Correia\ATEC\mastermind\obj\Debug\mastermind.csproj.CoreCompileInputs.cache
+C:\João Correia\ATEC\mastermind\obj\Debug\mastermind.exe
+C:\João Correia\ATEC\mastermind\obj\Debug\mastermind.pdb

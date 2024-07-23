@@ -1,0 +1,92 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Jo\u00E3o Correia\\ATEC\\mastermind\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{09B0EC05-4109-457F-A013-7E1D2BD75192}|mastermind.csproj|c:\\jo\u00E3o correia\\atec\\mastermind\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09B0EC05-4109-457F-A013-7E1D2BD75192}|mastermind.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09B0EC05-4109-457F-A013-7E1D2BD75192}|mastermind.csproj|c:\\jo\u00E3o correia\\atec\\mastermind\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09B0EC05-4109-457F-A013-7E1D2BD75192}|mastermind.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09B0EC05-4109-457F-A013-7E1D2BD75192}|mastermind.csproj|c:\\jo\u00E3o correia\\atec\\mastermind\\coloredball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09B0EC05-4109-457F-A013-7E1D2BD75192}|mastermind.csproj|solutionrelative:coloredball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09B0EC05-4109-457F-A013-7E1D2BD75192}|mastermind.csproj|c:\\jo\u00E3o correia\\atec\\mastermind\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{09B0EC05-4109-457F-A013-7E1D2BD75192}|mastermind.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 157,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Jo\u00E3o Correia\\ATEC\\mastermind\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Jo\u00E3o Correia\\ATEC\\mastermind\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AQIAABkAAAAAAAAAAAAgwCYAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-23T05:20:52.535Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Jo\u00E3o Correia\\ATEC\\mastermind\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "Form1.Designer.cs",
+              "ToolTip": "C:\\Jo\u00E3o Correia\\ATEC\\mastermind\\Form1.Designer.cs",
+              "RelativeToolTip": "Form1.Designer.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAgwCcAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-23T06:07:00.052Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ColoredBall.cs",
+              "DocumentMoniker": "C:\\Jo\u00E3o Correia\\ATEC\\mastermind\\ColoredBall.cs",
+              "RelativeDocumentMoniker": "ColoredBall.cs",
+              "ToolTip": "C:\\Jo\u00E3o Correia\\ATEC\\mastermind\\ColoredBall.cs",
+              "RelativeToolTip": "ColoredBall.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAgwCQAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-23T05:24:53.131Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Jo\u00E3o Correia\\ATEC\\mastermind\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Jo\u00E3o Correia\\ATEC\\mastermind\\Form1.cs [Design]",
+              "RelativeToolTip": "Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-23T03:55:14.601Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
