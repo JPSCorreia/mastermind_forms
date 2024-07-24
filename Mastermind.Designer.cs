@@ -34,12 +34,13 @@ namespace mastermind
         {
             this.btnStartNewGame = new System.Windows.Forms.Button();
             this.btnInstructions = new System.Windows.Forms.Button();
+            this.lblAttempts = new System.Windows.Forms.Label();
 
             this.SuspendLayout();
             // 
             // btnStartNewGame
             // 
-            this.btnStartNewGame.Location = new System.Drawing.Point(10, 670);
+            this.btnStartNewGame.Location = new System.Drawing.Point(10, 640);
             this.btnStartNewGame.Name = "btnStartNewGame";
             this.btnStartNewGame.Size = new System.Drawing.Size(80, 24);
             this.btnStartNewGame.TabIndex = 1;
@@ -51,7 +52,7 @@ namespace mastermind
             // 
             // btnStartNewGame
             // 
-            this.btnInstructions.Location = new System.Drawing.Point(100, 670);
+            this.btnInstructions.Location = new System.Drawing.Point(10, 670);
             this.btnInstructions.Name = "btnInstructions";
             this.btnInstructions.Size = new System.Drawing.Size(80, 24);
             this.btnInstructions.TabIndex = 2;
@@ -61,14 +62,25 @@ namespace mastermind
             this.btnInstructions.ForeColor = Color.White; // Set text color
             this.btnInstructions.Click += new System.EventHandler(this.btnInstructions_Click);
             // 
+            // lblAttempts
+            // 
+            this.lblAttempts.AutoSize = true;
+            this.lblAttempts.Location = new System.Drawing.Point(10, 620);
+            this.lblAttempts.Name = "lblAttempts";
+            this.lblAttempts.Size = new System.Drawing.Size(82, 13);
+            this.lblAttempts.TabIndex = 3;
+            this.lblAttempts.Text = "Tentativas: 0";
+            this.lblAttempts.ForeColor = Color.White; // Define a cor do texto como branco
+            // 
             // 
             // Mastermind
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450,700);
+            this.ClientSize = new System.Drawing.Size(400,700);
             this.Controls.Add(this.btnStartNewGame);
             this.Controls.Add(this.btnInstructions);
+            this.Controls.Add(this.lblAttempts);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "Mastermind";
@@ -80,12 +92,12 @@ namespace mastermind
 
         private System.Windows.Forms.Button btnStartNewGame;
         private System.Windows.Forms.Button btnInstructions;
+        private System.Windows.Forms.Label lblAttempts;
 
         #endregion
 
         private void btnStartNewGame_Click(object sender, System.EventArgs e)
         {
-            MessageBox.Show("A começar um jogo novo.");
             StartNewGame();
         }
 
@@ -117,7 +129,7 @@ Botão ""Instruções"": Exibe estas instruções sobre como jogar o Mastermind.
 
             Boa sorte e divirta-se a jogar Mastermind!";
 
-            MessageBox.Show(instructions, "Instruções", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(instructions, "Instruções");
         }
 
     }

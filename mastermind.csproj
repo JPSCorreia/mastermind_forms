@@ -49,6 +49,9 @@
     <Compile Include="ColoredBall.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="FeedbackBall.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Mastermind.cs">
       <SubType>Form</SubType>
     </Compile>

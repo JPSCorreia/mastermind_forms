@@ -6,15 +6,17 @@ using System.Windows.Forms;
 // classe para uma bola de uma cor
 public class ColoredBall : Control
 {
-    private Color ballColor; // cor.
+    private Color ballColor; // cor da bola.
     private Mastermind parentForm; // parent form onde está a logica do jogo.
     private bool isControlBall; // se faz parte dos controles ou não.
+    private int ballPosition; // Posição da bola (de 1 a 4).
 
     // constructor para preencher a bola de uma cor, dar-lhe um certo tamanho e dar funcionalidade de controle se necessário.
-    public ColoredBall(int colorNumber, bool isControlBall, Mastermind form)
+    public ColoredBall(Color color, bool isControlBall, Mastermind form, int position = 0)
     {
         parentForm = form;
-        ballColor = parentForm.GetColorFromNumber(colorNumber);
+        ballColor = color;
+        ballPosition = position;
         this.Size = new Size(40, 40);
         this.isControlBall = isControlBall;
         if (isControlBall)
@@ -23,6 +25,12 @@ public class ColoredBall : Control
             this.MouseLeave += ColoredBall_MouseLeave;
             this.Click += ColoredBall_Click;
         }
+    }
+
+    // Getter para obter a cor da bola.
+    public Color BallColor
+    {
+        get { return ballColor; }
     }
 
     // método que desenha a bola do tamanho e da cor desejado.

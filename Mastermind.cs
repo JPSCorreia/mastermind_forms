@@ -10,15 +10,14 @@ using System.Windows.Forms;
 
 namespace mastermind
 {
-    // lógica do jogo
     public partial class Mastermind : Form
     {
 
-        private int[] secretCode; // código secreto.
+        private Color[] secretCode; // código secreto.
         private int attempts; // numero de tentativas feitas.
-        private bool winner; // se o jogador é vencedor.
+        public bool gameover; // se o jogo acabou.
         private List<ColoredBall> addedBalls; // lista das bolas clickadas pelo jogador.
-        private int rowPosition = 450; // linha da tentativa correspondente.
+        private int rowPosition; // linha da tentativa correspondente.
 
         // constructor que inicializa um novo jogo.
         public Mastermind()
@@ -28,87 +27,104 @@ namespace mastermind
             StartNewGame();
         }
 
-        // função que gera um array com 4 numeros aleatórios de 1 a 6 (sem repetição) para ser usado no código secreto.
-        private static int[] GenerateSecretCode()
+        // função que gera um array com 4 cores aleatórias para ser usado como código secreto.
+        private static Color[] GenerateSecretCode()
         {
-            List<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6 };
+                List<Color> colors = new List<Color> 
+                { 
+                    Color.Red, 
+                    Color.Green, 
+                    Color.Blue, 
+                    Color.Yellow, 
+                    Color.Purple, 
+                    Color.Orange 
+                };
             Random random = new Random(); // nova instancia de Random.
-            int[] randomArray = numbers.OrderBy(x => random.Next()).Take(4).ToArray();
+            Color[] randomArray = colors.OrderBy(x => random.Next()).Take(4).ToArray(); // baralhar a lista de cores e selecionar as primeiras 4
             return randomArray;
         }
 
         // função que começa um jogo novo.
         private async void StartNewGame()
         {
+            RemoveAllColoredBalls();
             secretCode = GenerateSecretCode();
             attempts = 0;
-            winner = false;
-            // MessageBox.Show("Starting new game.");
-            GenerateColoredBallsControls();
-            GenerateColoredBallsRow(50);
+            gameover = false;
+            UpdateAttemptsLabel();
+            rowPosition = 450;
+            GenerateColoredBallsControls(); // mostrar controles.
+            // GenerateColoredBallsSolution(); // mostrar solução no ecran para debugging.
             await StartNewTurn();
-
         }
 
-        // função assincrona que inicia um novo turno.
+        // função que inicia um novo turno.
         private async Task StartNewTurn()
         {
             addedBalls = new List<ColoredBall>();
 
-            // Application.DoEvents(); // processar eventos pendentes
-            // continuar enquanto não houver vencedor e ainda haver tentativas.
-            while (!winner && attempts < 10)
+            while (!gameover)
             {
 
                 if (addedBalls.Count == 4)
                 {
+                    attempts++;
+                    UpdateAttemptsLabel();
+                    GenerateFeedbackBalls();
                     CheckGuess();
-                    if (!winner)
+                    if (!gameover)
                     {
-                        attempts++;
                         rowPosition -= 50;
                         await StartNewTurn();
-
                     }
                 }
-                await Task.Delay(100); // aguardar um curto período para permitir actualizações.
+                await Task.Delay(10); // aguardar um curto período para permitir actualizações.
             }
         }
 
+        // função que remove todas as bolas do ecran.
+        private void RemoveAllColoredBalls()
+        {
+            var controlsToRemove = this.Controls.OfType<ColoredBall>().ToList();
+            var othersToRemove = this.Controls.OfType<FeedbackBall>().ToList();
+
+
+            foreach (var ball in controlsToRemove)
+            {
+                this.Controls.Remove(ball);
+                ball.Dispose();
+            }
+            foreach (var ball in othersToRemove)
+            {
+                this.Controls.Remove(ball);
+                ball.Dispose();
+            }
+        }
 
         // função para verificar se a tentativa do jogador foi correcta.
         private void CheckGuess()
         {
-            bool correctGuess = false;
-            // comparar seleção do utilizador com o codigo secreto.
-            for (int i = 0; i < 4; i++)
+            Color[] choiceArray = { addedBalls[0].BallColor, addedBalls[1].BallColor, addedBalls[2].BallColor , addedBalls[3].BallColor };
+
+            if (choiceArray[0] == secretCode[0] && choiceArray[1] == secretCode[1] && choiceArray[2] == secretCode[2] && choiceArray[3] == secretCode[3])
             {
-                if (GetNumberFromColor(addedBalls[i].BackColor) != secretCode[i])
-                {
-                    correctGuess = false;
-                    break;
-                }
+                GameOver();
+                MessageBox.Show("Ganhou! Acertou no código secreto.", "Game Over!");
             }
-            // acabar o jogo se o utilizador for o vencedor ou se ultrapassar o numero máximo de tentativas.
-            if (correctGuess)
+            else if (attempts >= 10)
             {
-                winner = true;
-                MessageBox.Show("Parabéns! É o vencedor!");
-            }
-            else if (attempts >= 9)
-            {
-                MessageBox.Show("Alcançou o número máximo de tentativas. Game Over!");
+                GameOver();
+                MessageBox.Show("Perdeu! Alcançou o número máximo de tentativas.", "Game Over!");
             }
         }
 
-        // função que gera uma linha de bolas (com o código secreto de momento).
-        private void GenerateColoredBallsRow(int positionY)
+        // função que gera a linha de bolas com a solução.
+        private void GenerateColoredBallsSolution()
         {
             for (int i = 0; i <= 3; i++)
             {
-                // Criar nova bola com cor random.
                 ColoredBall ball = new ColoredBall(secretCode[i], false, this); 
-                ball.Location = new Point(100 + i * 50, positionY);
+                ball.Location = new Point(100 + i * 50, 30);
                 this.Controls.Add(ball);
             }
         }
@@ -116,20 +132,30 @@ namespace mastermind
         // função que gera os controles.
         private void GenerateColoredBallsControls()
         {
-            for (int i = 1; i <= 6; i++)
+            List<Color> colors = new List<Color>
             {
-                ColoredBall ball = new ColoredBall(i, true, this);
-                ball.Location = new Point(400, 350 + i * 50);
+                Color.Red,
+                Color.Green,
+                Color.Blue,
+                Color.Yellow,
+                Color.Purple,
+                Color.Orange
+            };
+
+            for (int i = 0; i <= 5; i++)
+            {
+                ColoredBall ball = new ColoredBall(colors[i], true, this);
+                ball.Location = new Point(100 + i * 50, 647);
                 this.Controls.Add(ball);
             }
         }
 
-        // função que adiciona uma nova instancia da classe ColoredBall ao jogo. 
+        // função que adiciona uma nova ColoredBall ao jogo. 
         public void AddColoredBall(Color color)
         {
-            if (addedBalls.Count < 4)
+            if ((addedBalls.Count < 4) && (gameover == false))
             {
-                ColoredBall newBall = new ColoredBall(GetNumberFromColor(color), false, this);
+                ColoredBall newBall = new ColoredBall(color, false, this, addedBalls.Count + 1);
                 int xOffset = 100 + addedBalls.Count * 50;
                 newBall.Location = new Point(xOffset, rowPosition + 100);
                 addedBalls.Add(newBall);
@@ -137,34 +163,83 @@ namespace mastermind
             }
         }
 
-
-        // função que devolve um numero associado a uma cor.
-        public int GetNumberFromColor(Color color)
+        // função que gera uma linha de bolas de feedback.
+        private void GenerateFeedbackBalls()
         {
-            if (color == Color.Red) return 1;
-            if (color == Color.Green) return 2;
-            if (color == Color.Blue) return 3;
-            if (color == Color.Yellow) return 4;
-            if (color == Color.Purple) return 5;
-            if (color == Color.Orange) return 6;
-            return 0;
+            
+            int[] feedback = GetFeedback(); // obter o feedback da linha actual.
+            int feedbackStartX = 300; // posição inicial da primeira bola de feedback
+            int feedbackSpacing = 15; // espaçamento entre bolas de feedback
+
+            int redCount = feedback.Count(f => f == 2); // contar bolas vermelhas.
+            int whiteCount = feedback.Count(f => f == 1); // contar bolas brancas.
+
+            // criar bolas de feedback vermelhas
+            for (int i = 0; i < redCount; i++)
+            {
+                FeedbackBall newBall = new FeedbackBall(Color.Red, this);
+                newBall.Location = new Point(feedbackStartX + i * feedbackSpacing, rowPosition + 115);
+                this.Controls.Add(newBall);
+            }
+
+            // criar bolas de feedback brancas
+            for (int i = 0; i < whiteCount; i++)
+            {
+                FeedbackBall newBall = new FeedbackBall(Color.White, this);
+                newBall.Location = new Point(feedbackStartX + (redCount + i) * feedbackSpacing, rowPosition + 115);
+                this.Controls.Add(newBall);
+            }
         }
 
-        // função que devolve uma cor associado a um numero.
-        public Color GetColorFromNumber(int number)
+        // função que termina o jogo.
+        private void GameOver()
         {
-            if (number == 1) return Color.Red;
-            if (number == 2) return Color.Green;
-            if (number == 3) return Color.Blue;
-            if (number == 4) return Color.Yellow;
-            if (number == 5) return Color.Purple;
-            if (number == 6) return Color.Orange;
-            return Color.Black;
+            GenerateColoredBallsSolution();
+            gameover = true;
         }
 
+        // função que devolve o feedback sobre a linha jogada.
+        private int[] GetFeedback()
+        {
+            int[] feedback = new int[4]; // 0 = não correto, 1 = cor correta, 2 = cor e posição correctas.
+            Color[] choiceArray = { addedBalls[0].BallColor, addedBalls[1].BallColor, addedBalls[2].BallColor, addedBalls[3].BallColor };
+            bool[] usedInSecretCode = new bool[4];
+            bool[] usedInGuess = new bool[4];
 
+            for (int i = 0; i < 4; i++)
+            {
+                if (choiceArray[i] == secretCode[i])
+                {
+                    feedback[i] = 2;
+                    usedInSecretCode[i] = true;
+                    usedInGuess[i] = true;
+                }
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (feedback[i] != 2)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        if (!usedInGuess[j] && choiceArray[i] == secretCode[j] && !usedInSecretCode[j])
+                        {
+                            feedback[i] = 1;
+                            usedInSecretCode[j] = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            return feedback;
+        }
+
+        // função que faz update á label de tentativas.
+        private void UpdateAttemptsLabel()
+        {
+            lblAttempts.Text = $"Tentativas: {attempts}";
+        }
 
     }
-
 
 }
